@@ -54,7 +54,6 @@
 
 - A	Crear y poblar base de datos (setup_db.py)
 
-
 - B	Función para agregar cliente
 
 - C	Función para buscar cliente
