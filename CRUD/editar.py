@@ -2,8 +2,11 @@ from Utils.db import conexion
 
 def edit_client():
     try:
+        conn = conexion()
+        cursor = conn.cursor()
+
         cliente_id = input("Ingresa el ID del cliente que desea editar: ")
-        if not cliente_id.str.isdigit():
+        if not cliente_id.isdigit():
             return "Error, el id debe ser numero."
         cliente_id = int(cliente_id)
 
@@ -15,22 +18,22 @@ def edit_client():
 
         new_email = input("Ingresa el nuevo correo: ")
         if new_email:
-            datos_actualizar["email"] = new_email
+            datos_actualizar["correo"] = new_email
         
         new_phonenumber = input("Ingresa el nuevo numero de telefono: ")
         if new_phonenumber:
-            datos_actualizar["numero"] = new_phonenumber
+            datos_actualizar["telefono"] = new_phonenumber
         
         new_emprise = input("Ingresa la nueva empresa: ")
         if new_emprise:
             datos_actualizar["empresa"] = new_emprise
-        
+        new_date = input("Ingrese la nueva fecha: ")
+        datos_actualizar["fecha"] = new_date
         if not datos_actualizar:
             
             return "No se proporcionaron datos para actualizar."
         
-        conn = conexion()
-        cursor = conn.cursor()
+        
 
         updates = []
         values = []
@@ -38,10 +41,10 @@ def edit_client():
             updates.append(f"{key} = ?")
             values.append(value)
 
-        sql = f"UPDATE clientes SET {', '.join(updates)} WHERE id = ?"
+        sql = f"UPDATE registros SET {', '.join(updates)} WHERE id = (?)"
         values.append(cliente_id)
 
-        cursor.execute(sql, tuple(values))
+        conn.execute(sql,(values,))
         conn.commit()
 
         if cursor.rowcount > 0:

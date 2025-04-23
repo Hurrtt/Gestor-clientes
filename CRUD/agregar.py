@@ -15,7 +15,7 @@ def agregar_cliente():
         fechaActual = datetime.now()
         fechaConFormato = fechaActual.strftime("%d/%m/%Y")
 
-        query = ('''INSERT INTO registros (nombre, correo, telefono, empresa, fecha) VALUES (?, ?, ?, ?)''')
+        query = ('''INSERT INTO registros (nombre, correo, telefono, empresa, fecha) VALUES (?, ?, ?, ?, ?)''')
         conection.execute(query, (nombre, correo, telefono, empresa, fechaConFormato))
         conection.commit()
         conection.close()
