@@ -2,7 +2,7 @@ import sqlite3
 from Utils.db import conexion
 
 
-def eliminar():
+def eliminar_cliente():
     try:
         connection = conexion()
         cursor = connection.cursor()
