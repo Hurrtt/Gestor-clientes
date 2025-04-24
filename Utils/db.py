@@ -7,7 +7,6 @@ def conexion():
     try:
         connection = sqlite3.connect('clientes.db')
         if os.path.exists('clientes.db'):
-            print("Base de datos creada")
             return connection
         
     except sqlite3.Error as e:
